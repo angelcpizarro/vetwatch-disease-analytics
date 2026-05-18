@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# VetWatch project-specific
+*.json
+/data/
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
