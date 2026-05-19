@@ -41,7 +41,7 @@ An API integration was considered to simulate how production pipelines work with
 
 ## 📐 Data Architecture
 
-The data management approach follows the Kimball methodology, respecting Separation of Concerns (SoC). Transformations are handled in dbt across three layers: Staging, Intermediate, and Mart.
+The data management approach follows a modern analytics engineering pattern, with a layered dbt architecture (staging → intermediate → marts) respecting Separation of Concerns.
 
 *Architecture diagram coming soon*
 
