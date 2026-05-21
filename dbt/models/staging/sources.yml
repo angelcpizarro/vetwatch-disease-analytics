@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: wahis_raw
+    database: vetwatch-disease-analytics
+    schema: wahis_raw
+    description: "Raw WAHIS quantitative data loaded by Python ingestion scripts. Contains 627,720 global animal disease outbreak records from 2005 to 2024."
+    
+    tables:
+      - name: outbreaks
+        description: "Raw animal disease outbreak records from the WAHIS six-monthly quantitative CSV export. One row represents one species within one outbreak event, within one administrative division, within one semester."
