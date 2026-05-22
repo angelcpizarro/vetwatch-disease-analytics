@@ -1,0 +1,124 @@
+version: 2
+
+models:
+  - name: stg_wahis__outbreaks
+    description: >
+      Staged animal disease outbreak records from the WAHIS quantitative 
+      six-monthly CSV export. One row represents one species within one 
+      outbreak event, within one administrative division, within one semester.
+      Source data covers 2005 to 2024.
+      Raw column names have been renamed to snake_case, string fields trimmed,
+      and numeric fields cast to integer. Null values were handled in the Python 
+      ingestion script.
+
+    columns:
+      - name: event_id
+        description: >
+          Numeric identifier linking rows to a parent disease event.
+          Blank for six-monthly report (SMR) records — only populated
+          for immediate notification and follow-up report (IN/FUR) records.
+
+      - name: outbreak_id
+        description: >
+          Numeric identifier linking rows to a specific outbreak.
+          Blank for SMR records. Use this field to identify IN/FUR sourced rows.
+
+      - name: report_year
+        description: "Reporting year as an integer (2005–2024)."
+        tests:
+          - not_null
+
+      - name: report_semester
+        description: >
+          Six-month reporting period. Values follow the pattern
+          'First semester YYYY' or 'Second semester YYYY'.
+          No exact outbreak dates are available — semester is the
+          finest time granularity in this dataset.
+        tests:
+          - not_null
+
+      - name: world_region
+        description: "WOAH world region of the reporting country."
+        tests:
+          - not_null
+
+      - name: country_name
+        description: "Full country name of the reporting member."
+        tests:
+          - not_null
+
+      - name: administrative_division
+        description: >
+          Sub-national administrative area where the outbreak occurred.
+          Granularity varies by country — ranges from province level
+          to district level.
+
+      - name: disease_name_raw
+        description: >
+          Full WAHIS disease name using formal nomenclature, including
+          taxonomic qualifiers and year suffixes. Long and inconsistently
+          formatted across years. Mapped to clean short names and categories
+          in the intermediate layer via the disease_categories seed file.
+        tests:
+          - not_null
+
+      - name: serotype
+        description: >
+          Strain, serotype, or genotype detail where available. Blank for
+          most diseases. Multiple values separated by semicolons indicate
+          co-circulation of strains. Values include 'not typed' and 
+          'not sampled' where laboratory testing was inconclusive.
+
+      - name: animal_category
+        description: "Whether the affected animals are Domestic or Wild."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Domestic', 'Wild', 'Both animal categories']
+
+      - name: species
+        description: >
+          Animal species affected by the outbreak. Blank for summary rows
+          where species breakdown is not provided.
+
+      - name: new_outbreaks
+        description: >
+          Number of new outbreaks that started in this semester.
+          For IN/FUR records, only one species row per outbreak carries
+          the count — remaining rows show 0 to avoid double counting.
+
+      - name: case_count
+        description: >
+          Number of confirmed cases in this record. NULL in approximately
+          44% of records — represents missing data, not zero cases.
+
+      - name: death_count
+        description: >
+          Number of animals that died from the disease. NULL represents
+          missing data, not zero deaths.
+
+      - name: killed_count
+        description: >
+          Number of animals killed and disposed of as a disease control
+          measure. NULL represents missing data, not zero.
+
+      - name: slaughtered_count
+        description: >
+          Number of animals slaughtered. NULL represents missing data,
+          not zero.
+
+      - name: vaccinated_count
+        description: >
+          Number of animals vaccinated. NULL represents missing data,
+          not zero.
+
+      - name: susceptible_count
+        description: >
+          Estimated population at risk. NULL represents missing data,
+          not zero.
+
+      - name: measuring_units
+        description: >
+          Unit of measurement for quantitative fields.
+          Either 'Animals' or 'Hives' (for bee diseases).
