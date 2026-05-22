@@ -5,23 +5,23 @@ with source as (
 renamed as (
     select
         -- identifiers
-        cast(event_id as integer)               as event_id,
-        cast(outbreak_id as integer)            as outbreak_id,
+        cast(event_id as integer)                       as event_id,
+        cast(outbreak_id as integer)                    as outbreak_id,
 
         -- time
-        cast(year as integer)                   as report_year,
-        TRIM(semester)                          as report_semester,
+        cast(year as integer)                           as report_year,
+        TRIM(semester)                                  as report_semester,
 
         -- geography
-        TRIM(world_region)                      as world_region,
-        TRIM(country)                           as country_name,
-        TRIM(administrative_division)           as administrative_division,
+        TRIM(world_region)                              as world_region,
+        TRIM(country)                                   as country_name,
+        TRIM(administrative_division)                   as administrative_division,
 
         -- disease
-        TRIM(disease)                           as disease_name_raw,
-        TRIM(serotype_subtype_genotype)         as serotype,
-        TRIM(animal_category)                   as animal_category,
-        TRIM(species)                           as species,
+        REPLACE(TRIM(disease), '\u00a0', ' ')           as disease_name_raw,
+        TRIM(serotype_subtype_genotype)                 as serotype,
+        TRIM(animal_category)                           as animal_category,
+        TRIM(species)                                   as species,
 
         -- quantitative fields
         cast(new_outbreaks as integer)          as new_outbreaks,
