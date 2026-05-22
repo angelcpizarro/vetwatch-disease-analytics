@@ -1,0 +1,179 @@
+disease_name_raw,disease_short_name,disease_category,is_zoonotic
+Abalone herpesvirus (Inf. with),Abalone herpesvirus,Aquatic,false
+Acarapis woodi (Inf. of honey bees with),Acarine disease,Apiary,false
+Acute hepatopancreatic necrosis disease (2016-),AHPND,Aquatic,false
+Aeromonas hydrophila (Inf. with),Aeromonas,Aquatic,false
+Aethina tumida (Inf. with)(Small hive beetle)(2006-),Small hive beetle,Apiary,false
+African horse sickness virus (Inf. with),African horse sickness,Equine,false
+African swine fever virus (Inf. with),African swine fever,Swine,false
+Anthrax,Anthrax,Multi-species,true
+Aphanomyces astaci (Inf. with)(Crayfish plague),Crayfish plague,Aquatic,false
+Aphanomyces invadans (Inf. with) (Epizootic ulcerative syndrome),Epizootic ulcerative syndrome,Aquatic,false
+Atrophic rhinitis of swine (-2005),Atrophic rhinitis,Swine,false
+Aujeszky's disease virus (Inf. with),Aujeszky's disease,Swine,false
+Avian chlamydiosis,Avian chlamydiosis,Avian,true
+Avian infectious bronchitis,Avian infectious bronchitis,Avian,false
+Avian infectious laryngotracheitis,Avian infectious laryngotracheitis,Avian,false
+Avian influenza A viruses of high pathogenicity (Inf. with) (bovines [Bos taurus]) (2025-),HPAI (bovines),Avian,true
+Avian tuberculosis (-2005),Avian tuberculosis,Avian,true
+Bacterial kidney disease (Renibacterium salmoninarum)(-2006),Bacterial kidney disease,Aquatic,false
+Batrachochytrium dendrobatidis (Inf. with)(2009-),Chytridiomycosis,Wildlife,false
+Batrachochytrium salamandrivorans (Inf. with)(2014-),Bsal,Wildlife,false
+Bluetongue virus (Inf. with),Bluetongue,Livestock,false
+Bonamia exitiosa (Inf. with),Bonamia exitiosa,Aquatic,false
+Bonamia ostreae (Inf. with),Bonamia ostreae,Aquatic,false
+Botulism (-2014),Botulism,Multi-species,false
+Bovine anaplasmosis,Bovine anaplasmosis,Livestock,false
+Bovine babesiosis,Bovine babesiosis,Livestock,false
+Bovine cysticercosis (-2014),Bovine cysticercosis,Livestock,true
+Bovine genital campylobacteriosis,Bovine campylobacteriosis,Livestock,false
+Bovine pestiviruses (Inf. with) (Bovine viral diarrhoea),BVD,Livestock,false
+Bovine spongiform encephalopathy,BSE,Livestock,true
+Bovine tuberculosis (-2018),Bovine TB,Livestock,true
+Brucella abortus (Inf. with),Brucellosis (abortus),Livestock,true
+Brucella melitensis (Inf. with),Brucellosis (melitensis),Livestock,true
+Brucella suis (Inf. with),Brucellosis (suis),Swine,true
+Burkholderia mallei (Inf. with) (Glanders),Glanders,Equine,true
+Camelpox virus (inf. with),Camelpox,Livestock,true
+Caprine arthritis/encephalitis,Caprine arthritis/encephalitis,Livestock,false
+"Chlamydia abortus (Inf. with) (Enzootic abortion of ewes, ovine chlamydiosis)",Enzootic abortion,Livestock,true
+Chrysomya bezziana (Inf. with) (Old world screwworm),Old world screwworm,Multi-species,false
+Classical swine fever virus (Inf. with),Classical swine fever,Swine,false
+Cochliomyia hominivorax (Inf. with) (New world screwworm),New world screwworm,Multi-species,false
+Contagious agalactia,Contagious agalactia,Livestock,false
+Contagious caprine pleuropneumonia,Contagious caprine pleuropneumonia,Livestock,false
+Coxiella burnetii (Inf. with) (Q fever),Q fever,Multi-species,true
+Crimean Congo haemorrhagic fever (2006-),CCHF,Multi-species,true
+Decapod iridescent virus 1 (Inf. with) (2022-),DIV1,Aquatic,false
+Dermatophilosis (-2005),Dermatophilosis,Livestock,false
+Duck virus enteritis (-2005),Duck virus enteritis,Avian,false
+Duck virus hepatitis,Duck virus hepatitis,Avian,false
+Eastern equine encephalitis virus (Inf. with) (Eastern equine encephalomyelitis) (2006-),EEE,Equine,true
+Echinococcosis/hydatidosis,Echinococcosis,Multi-species,true
+Echinococcus granulosus (Inf. with) (2014-),Echinococcus granulosus,Multi-species,true
+Echinococcus multilocularis (Inf. with) (2014-),Echinococcus multilocularis,Multi-species,true
+Ehrlichia canis (Inf. with),Ehrlichiosis,Multi-species,true
+Enterovirus encephalomyelitis (-2005),Enterovirus encephalomyelitis,Swine,false
+Enzootic bovine leukosis,Enzootic bovine leukosis,Livestock,false
+Epizootic haematopoietic necrosis virus (Inf. with),EHN,Aquatic,false
+Epizootic hemorrhagic disease virus (Inf. with),EHD,Wildlife,false
+Epizootic lymphangitis (-2005),Epizootic lymphangitis,Equine,false
+Equid herpesvirus-1 (Inf. with) (Equine rhinopneumonitis) (2014-),EHV-1,Equine,false
+Equine arteritis virus (Inf. with),Equine arteritis,Equine,false
+Equine encephalomyelitis (Eastern and Western)(-2005),Equine encephalomyelitis,Equine,true
+Equine encephalosis virus (Inf. with),Equine encephalosis,Equine,false
+Equine infectious anaemia,Equine infectious anaemia,Equine,false
+Equine influenza virus (Inf. with),Equine influenza,Equine,false
+Equine rhinopneumonitis (-2013),Equine rhinopneumonitis,Equine,false
+Foot and mouth disease virus (Inf. with),FMD,Livestock,false
+Fowl cholera (-2011),Fowl cholera,Avian,false
+Fowl pox (-2005),Fowl pox,Avian,false
+Fowl typhoid,Fowl typhoid,Avian,false
+Gyrodactylus salaris (Inf. with),Gyrodactylus,Aquatic,false
+Haemorrhagic septicaemia (Pasteurella multocida serotypes 6:b and 6:e),Haemorrhagic septicaemia,Livestock,false
+Haplosporidium nelsoni (Inf. with)(-2005),MSX disease,Aquatic,false
+Heartwater,Heartwater,Livestock,false
+Hendra viruses (Inf. with),Hendra virus,Equine,true
+Hepatobacter penaei (Inf. with)(Necrotising hepatopancreatitis)(2011-),NHP,Aquatic,false
+Hepatopancreatitis in prawns,Hepatopancreatitis,Aquatic,false
+High pathogenicity avian influenza viruses (Inf. with) (poultry),HPAI (poultry),Avian,true
+Horse mange (-2005),Horse mange,Equine,false
+Horse pox (-2005),Horse pox,Equine,true
+Infectious bovine rhinotracheitis/infectious pustular vulvovaginitis,IBR/IPV,Livestock,false
+Infectious bursal disease (Gumboro disease),Gumboro disease,Avian,false
+Infectious haematopoietic necrosis virus (Inf. with),IHN,Aquatic,false
+Infectious hypodermal and haematopoietic necrosis virus (Inf. with),IHHN,Aquatic,false
+Infectious myonecrosis virus (Inf. with)(2008-),IMN,Aquatic,false
+Infectious pancreatic necrosis (-2006),IPN,Aquatic,false
+Infectious salmon anaemia virus (Inf. with) (HPR-deleted or HPR0 genotypes),ISA,Aquatic,false
+Infectious spleen and kidney necrosis (ISKNV),ISKNV,Aquatic,false
+Influenza A virus (Inf. with),Influenza A,Avian,true
+Influenza A viruses of high pathogenicity (Inf. with) (non-poultry including wild birds) (2017-),HPAI (wildlife),Avian,true
+Japanese encephalitis,Japanese encephalitis,Multi-species,true
+Koi herpesvirus (Inf. with),Koi herpesvirus,Aquatic,false
+Leishmania spp. (Inf. with) (Leishmaniosis),Leishmaniosis,Multi-species,true
+Leptospirosis,Leptospirosis,Multi-species,true
+Low pathogenic avian influenza (poultry) (2006-2021),LPAI (poultry),Avian,true
+Low pathogenicity avian influenza viruses transmissible to humans (Inf. with) (2022-),LPAI (transmissible),Avian,true
+Lumpy skin disease virus (Inf. with),Lumpy skin disease,Livestock,false
+Macrobrachium rosenbergii nodavirus (Inf. with) (White tail disease) (2008-),White tail disease,Aquatic,false
+Maedi-visna,Maedi-visna,Livestock,false
+Malignant catarrhal fever (wildebeest only)(2006-2008),Malignant catarrhal fever,Wildlife,false
+Marek's disease (-2011),Marek's disease,Avian,false
+Marteilia refringens (Inf. with),Marteilia refringens,Aquatic,false
+Marteilia sydneyi (Inf. with)(-2005),Marteilia sydneyi,Aquatic,false
+Megalocytivirus pagrus 1 (Inf. with) (2025-),Megalocytivirus,Aquatic,false
+Melissococcus plutonius (Inf. of honey bees with) (European foulbrood),European foulbrood,Apiary,false
+Middle East respiratory syndrome coronavirus (inf. with) (2022-),MERS-CoV,Multi-species,true
+Mikrocytos mimicus n. sp. (Inf. with),Mikrocytos mimicus,Aquatic,false
+Mikrocytos roughleyi (Inf. with)(-2005),Mikrocytos roughleyi,Aquatic,false
+Monkey pox,Mpox,Multi-species,true
+Mycobacterium tuberculosis (Inf. with)(-2017),Tuberculosis,Multi-species,true
+Mycobacterium tuberculosis complex (Inf. with)(2019-),Tuberculosis complex,Multi-species,true
+Mycoplasma gallisepticum (Inf. with) (Avian mycoplasmosis),Avian mycoplasmosis (MG),Avian,false
+Mycoplasma mycoides subsp. mycoides (Inf. with) (Contagious bovine pleuropneumonia),CBPP,Livestock,false
+Mycoplasma synoviae (Inf. with) (Avian mycoplasmosis) (2006-),Avian mycoplasmosis (MS),Avian,false
+Myxomatosis,Myxomatosis,Wildlife,false
+Nairobi sheep disease,Nairobi sheep disease,Livestock,false
+New disease in rainbow trout,New disease rainbow trout,Aquatic,false
+Newcastle disease virus (Inf. with),Newcastle disease,Avian,false
+Oncorhynchus masou virus disease (-2005),OMV disease,Aquatic,false
+Ostreid herpesvirus-1 microvariant (Inf. with)(-2014),OsHV-1,Aquatic,false
+Ovine epididymitis (Brucella ovis),Ovine epididymitis,Livestock,false
+Ovine pulmonary adenomatosis (-2005),Ovine pulmonary adenomatosis,Livestock,false
+Paenibacillus larvae (Inf. of honey bees with) (American foulbrood),American foulbrood,Apiary,false
+Paratuberculosis,Paratuberculosis,Livestock,false
+Pathogenic rabbit lagoviruses (Inf. with) (Rabbit haemorrhagic disease),Rabbit haemorrhagic disease,Wildlife,false
+Perkinsus marinus (Inf. with),Perkinsus marinus,Aquatic,false
+Perkinsus olseni (Inf. with)(2006-),Perkinsus olseni,Aquatic,false
+Perkinsus olseni/atlanticus (Inf. with)(-2005),Perkinsus olseni/atlanticus,Aquatic,false
+Peste des petits ruminants virus (Inf. with),PPR,Livestock,false
+Pigeon rotavirus,Pigeon rotavirus,Avian,false
+Piscirickettsiosis (Piscirickettsia salmonis)(-2005),Piscirickettsiosis,Aquatic,false
+Porcine epidemic diarrhoea virus (Inf. with),PED,Swine,false
+Porcine reproductive and respiratory syndrome virus (Inf. with),PRRS,Swine,false
+Postweaning Multisystemic Wasting Syndrome (PMWS),PMWS,Swine,false
+Pox viruses (other than those listed by the OIE)(Inf. with)(2011-),Pox viruses,Multi-species,true
+Pullorum disease,Pullorum disease,Avian,false
+Rabies virus (Inf. with),Rabies,Multi-species,true
+Ranavirus (Inf. with)(2009-),Ranavirus,Wildlife,false
+Red sea bream iridovirus (Inf. with) (-2024),RSIV,Aquatic,false
+Rift Valley fever virus (Inf. with),Rift Valley fever,Multi-species,true
+SARS-CoV-2 in animals (Inf. with),SARS-CoV-2,Multi-species,true
+Salmonellosis (S. abortusovis),Salmonellosis,Livestock,false
+Salmonid alphavirus (Inf. with)(2014-),SAV,Aquatic,false
+Schmallenberg virus (Inf. with),Schmallenberg virus,Livestock,false
+Scrapie,Scrapie,Livestock,false
+Sheep pox and goat pox,Sheep and goat pox,Livestock,true
+Spherical baculovirosis (Penaeus monodon-type baculovirus)(-2009),Spherical baculovirosis,Aquatic,false
+Spring viraemia of carp virus (Inf. with),Spring viraemia of carp,Aquatic,false
+Streptococcus suis (Inf. with),Streptococcus suis,Swine,true
+Swine vesicular disease (-2014),Swine vesicular disease,Swine,false
+Taenia solium (Inf. with) (Porcine cysticercosis),Porcine cysticercosis,Swine,true
+Taura syndrome virus (Inf. with),Taura syndrome,Aquatic,false
+Taylorella equigenitalis (Inf. with) (Contagious equine metritis),Contagious equine metritis,Equine,false
+"Theileria annulata, Theileria orientalis and Theileria parva (Inf. with)",Theileria spp.,Livestock,false
+Theileria equi and Babesia caballi (Inf. with) (Equine piroplasmosis),Equine piroplasmosis,Equine,false
+"Theileria lestoquardi, Theileria luwenshuni and Theileria uilenbergi (Inf. with) (2024-)",Theileria (small ruminants),Livestock,false
+Tilapia lake virus (Inf. with) (2023-),Tilapia lake virus,Aquatic,false
+Transmissible gastroenteritis,TGE,Swine,false
+Trichinella spp. (Inf. with),Trichinellosis,Multi-species,true
+Trichomonosis,Trichomonosis,Avian,false
+Tropilaelaps spp. (Inf. of honey bees with),Tropilaelaps,Apiary,false
+"Trypanosoma Brucei, T. Congolense, T. Simiae and T. Vivax (Inf. with) (2022-)",Trypanosomosis,Multi-species,true
+Trypanosoma equiperdum (Inf. with) (Dourine),Dourine,Equine,false
+Trypanosoma evansi (Inf. with) (Surra),Surra,Multi-species,false
+Trypanosomosis (tsetse-transmitted) (-2021),Trypanosomosis (tsetse),Multi-species,true
+Tularemia,Tularemia,Multi-species,true
+Turkey rhinotracheitis (2006-),Turkey rhinotracheitis,Avian,false
+Varroa spp. (Inf. of honey bees with) (Varroosis),Varroosis,Apiary,false
+Venezuelan equine encephalomyelitis,VEE,Equine,true
+Vesicular stomatitis (-2014),Vesicular stomatitis,Livestock,false
+Viral encephalopathy and retinopathy (-2005),VER,Aquatic,false
+Viral haemorrhagic septicaemia virus (Inf. with),VHS,Aquatic,false
+West Nile Fever,West Nile fever,Multi-species,true
+Western equine encephalitis virus (Inf. with) (Western equine encephalomyelitis) (2006-),WEE,Equine,true
+White spot syndrome virus (Inf. with),White spot syndrome,Aquatic,false
+Xenohaliotis californiensis (Inf. with),Withering syndrome,Aquatic,false
+Yellow head disease (-2018),Yellow head disease,Aquatic,false
+Yellow head virus genotype 1 (Inf. with) (2019-),Yellow head virus,Aquatic,false
