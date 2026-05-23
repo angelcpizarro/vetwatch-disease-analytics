@@ -5,7 +5,6 @@ with outbreaks as (
 reporting_quality as (
     select
         country_name,
-        world_region,
 
         -- volume metrics
         count(*)                                        as total_rows,
@@ -27,7 +26,7 @@ reporting_quality as (
             countif(has_vaccinated_count) / count(*) * 100, 1
         )                                               as vaccinated_completeness_pct,
 
-        -- Average of three completeness metrics)
+        -- composite quality score
         round(
             (
                 countif(has_case_count) +
@@ -37,7 +36,7 @@ reporting_quality as (
         )                                               as composite_quality_score
 
     from outbreaks
-    group by 1, 2
+    group by 1
 )
 
 select * from reporting_quality

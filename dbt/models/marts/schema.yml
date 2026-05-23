@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: mart_disease_trends
+    description: >
+      Analysis-ready table of outbreak trends by disease, region, and time.
+      One row per unique combination of year, semester, region, country,
+      disease, and animal category. Filtered to detail rows only to prevent
+      double counting. Primary data source for the disease trends dashboard page.
+
+    columns:
+      - name: report_year
+        description: "Reporting year (2005–2024)."
+        tests:
+          - not_null
+
+      - name: world_region
+        description: "WOAH world region."
+        tests:
+          - not_null
+
+      - name: disease_category
+        description: "Broad disease category."
+        tests:
+          - not_null
+
+      - name: total_outbreaks
+        description: "Sum of new outbreaks for this combination of dimensions."
+
+      - name: total_cases
+        description: >
+          Sum of confirmed cases. NULL where case count data was not reported —
+          interpret with caution, especially for regions with lower completeness scores.
+
+  - name: mart_country_summary
+    description: >
+      One row per country. Contains total outbreak counts, field-level 
+      completeness metrics, composite quality score, and quality band 
+      classification. Primary data source for the geographic breakdown 
+      and data quality scorecard dashboard pages.
+
+    columns:
+      - name: country_name
+        description: "Full country name — one row per country."
+        tests:
+          - not_null
+          - unique
+
+      - name: world_region
+        description: "WOAH world region."
+        tests:
+          - not_null
+
+      - name: composite_quality_score
+        description: >
+          Average of three completeness metrics (case count, death count,
+          vaccinated count). Ranges from 0 to 100.
+        tests:
+          - not_null
+
+      - name: quality_band
+        description: "High (≥70), Medium (≥40), or Low (<40) based on composite score."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['High', 'Medium', 'Low']
+
+  - name: mart_outbreak_detail
+    description: >
+      Flat, analysis-ready record of all outbreak events filtered to 
+      detail rows only. Contains all dimensions and measures from 
+      int_outbreaks_enriched. Use for ad hoc queries and drill-through
+      analysis in Looker Studio.
+
+    columns:
+      - name: report_year
+        description: "Reporting year (2005–2024)."
+        tests:
+          - not_null
+
+      - name: country_name
+        description: "Full country name of the reporting member."
+        tests:
+          - not_null
+
+      - name: disease_category
+        description: "Broad disease category from seed file."
+        tests:
+          - not_null
