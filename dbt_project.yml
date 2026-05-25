@@ -15,6 +15,10 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+seeds:
+  vetwatch_disease_analytics:
+    +schema: seeds
+
 models:
   vetwatch_disease_analytics:
     staging:
