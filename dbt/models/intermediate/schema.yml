@@ -3,11 +3,14 @@ version: 2
 models:
   - name: int_outbreaks_enriched
     description: >
-      Enriched outbreak records joining staged WAHIS data to the 
-      disease_categories seed file. One row represents one species within 
-      one outbreak event, within one administrative division, within one 
-      semester. Includes derived fields for report source classification,
-      row type identification, and field-level completeness flags.
+      Enriched outbreak records joining staged WAHIS data to the disease_categories 
+      seed file. The seed file is a manually curated reference table mapping raw 
+      disease names to clean short names and categories — see is_zoonotic column 
+      description for data warning.
+      Adds three derived fields: report_source (SMR vs IN_FUR), is_detail_row 
+      (identifies species-level rows for safe quantitative aggregation), and 
+      boolean completeness flags (has_case_count, has_death_count, 
+      has_vaccinated_count) for use in data quality models.
 
     columns:
       - name: report_year
@@ -38,6 +41,14 @@ models:
           - accepted_values:
               arguments:
                 values: ['Avian', 'Livestock', 'Swine', 'Equine', 'Aquatic', 'Apiary', 'Wildlife', 'Multi-species']
+      
+      - name: is_zoonotic
+        description: >
+          Boolean indicating whether the disease is considered zoonotic.
+          Sourced from the disease_categories seed file.
+          ⚠️ Not from an official database — classified using veterinary
+          clinical knowledge (May 2026) and official sources. May require updating as scientific
+          understanding evolves.
 
       - name: report_source
         description: "Whether the record originates from SMR or IN_FUR reporting."
