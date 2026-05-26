@@ -3,10 +3,10 @@ version: 2
 models:
   - name: mart_disease_trends
     description: >
-      Analysis-ready table of outbreak trends by disease, region, and time.
-      One row per unique combination of year, semester, region, country,
-      disease, and animal category. Filtered to detail rows only to prevent
-      double counting. Primary data source for the disease trends dashboard page.
+      Analysis-ready tables of outbreak trends by disease, region, and time,
+      also a table to check data quality and completeness, as well as a table 
+      filtered to detail rows only to prevent double counting. 
+      Primary data source for the disease trends dashboard page.
 
     columns:
       - name: report_year
@@ -28,9 +28,7 @@ models:
         description: "Sum of new outbreaks for this combination of dimensions."
 
       - name: total_cases
-        description: >
-          Sum of confirmed cases. NULL where case count data was not reported —
-          interpret with caution, especially for regions with lower completeness scores.
+        description: "Sum of confirmed cases. NULL where case count data was not reported."
 
   - name: mart_country_summary
     description: >
