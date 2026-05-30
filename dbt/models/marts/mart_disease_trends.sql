@@ -18,22 +18,30 @@ trends as (
         is_zoonotic,
         animal_category,
 
-        -- measures
-        sum(new_outbreaks)                          as total_outbreaks,
-        sum(case_count)                             as total_cases,
-        sum(death_count)                            as total_deaths,
-        sum(killed_count)                           as total_killed,
-        sum(vaccinated_count)                       as total_vaccinated,
+        -- outbreak counts (from rows that carry valid outbreak counts)
+        sum(case when is_outbreak_count_row 
+            then new_outbreaks else 0 end)              as total_outbreaks,
 
-        -- completeness metrics
-        count(*)                                    as total_rows,
-        countif(has_case_count)                     as rows_with_case_count,
+        -- quantitative metrics (from detail rows only)
+        sum(case when is_detail_row 
+            then case_count else null end)              as total_cases,
+        sum(case when is_detail_row 
+            then death_count else null end)             as total_deaths,
+        sum(case when is_detail_row 
+            then killed_count else null end)            as total_killed,
+        sum(case when is_detail_row 
+            then vaccinated_count else null end)        as total_vaccinated,
+
+        -- completeness metrics (from detail rows only)
+        countif(is_detail_row)                          as total_rows,
+        countif(is_detail_row and has_case_count)       as rows_with_case_count,
         round(
-            countif(has_case_count) / count(*) * 100, 1
-        )                                           as case_count_completeness_pct
+            countif(is_detail_row and has_case_count)
+            / nullif(countif(is_detail_row), 0) * 100, 1
+        )                                               as case_count_completeness_pct
+
 
     from outbreaks
-    where is_detail_row = true
     group by 1, 2, 3, 4, 5, 6, 7, 8
 )
 

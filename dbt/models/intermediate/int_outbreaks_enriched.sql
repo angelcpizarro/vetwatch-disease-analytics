@@ -52,6 +52,15 @@ enriched as (
             else true
         end                                         as is_detail_row,
 
+        -- true only on rows that carry a valid outbreak count (summary SMR rows)
+        case
+            when o.new_outbreaks is not null
+             and o.new_outbreaks > 0
+            then true
+            else false
+        end                                         as is_outbreak_count_row,
+
+        -- completeness flags
         case
             when o.case_count is not null
             then true else false
