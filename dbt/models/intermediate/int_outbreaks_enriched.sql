@@ -82,3 +82,4 @@ enriched as (
 )
 
 select * from enriched
+where disease_category != 'Apiary'
