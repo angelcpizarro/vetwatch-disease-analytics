@@ -40,46 +40,56 @@ enriched as (
         o.susceptible_count,
         o.measuring_units,
 
-        -- derived fields
+        -- derives rows by source type: 'SMR' or 'IN_FUR'
         case
             when o.outbreak_id is null then 'SMR'
             else 'IN_FUR'
         end                                         as report_source,
 
+        -- identifies detailed rows ('species' carrying a value, both 'SMR' and 'IN_FUR' level)
         case
             when o.species is null or o.species = ''
             then false
             else true
         end                                         as is_detail_row,
 
-        -- true only on rows that carry a valid outbreak count (summary SMR rows)
+        -- keeps only the summary rows at 'SMR' level ('new_outbreaks' carrying a value)
         case
             when o.new_outbreaks is not null
              and o.new_outbreaks > 0
+             and o.outbreak_id is null              -- SMR only
             then true
             else false
-        end                                         as is_outbreak_count_row,
-
-        -- completeness flags
-        case
-            when o.case_count is not null
-            then true else false
-        end                                         as has_case_count,
-
-        case
-            when o.death_count is not null
-            then true else false
-        end                                         as has_death_count,
-
-        case
-            when o.vaccinated_count is not null
-            then true else false
-        end                                         as has_vaccinated_count
-
+        end                                         as is_outbreak_count_row
+    
     from outbreaks o
     left join disease_categories d
         on o.disease_name_raw = d.disease_name_raw
+),
+
+enriched_with_flags as (
+    select
+        *,
+        -- completeness flags (detailed rows only)
+        case
+            when case_count is not null
+             and is_detail_row = true
+            then true else false
+        end                                          as has_case_count,
+
+        case
+            when death_count is not null
+             and is_detail_row = true
+            then true else false
+        end                                          as has_death_count,
+
+        case
+            when vaccinated_count is not null
+             and is_detail_row = true
+            then true else false
+        end                                          as has_vaccinated_count
+    from enriched
 )
 
-select * from enriched
+select * from enriched_with_flags
 where disease_category != 'Apiary'

@@ -2,7 +2,8 @@ with reporting_quality as (
     select * from {{ ref('int_country_reporting_quality') }}
 ),
 
--- get most common region per country to resolve inconsistencies
+-- get most common region per country to resolve inconsistencies 
+-- (i.e. one country in more than one world region)
 country_regions as (
     select
         country_name,
@@ -26,11 +27,7 @@ summary as (
     select
         r.country_name,
         f.world_region,
-        r.total_rows,
         r.total_outbreaks,
-        r.rows_with_case_count,
-        r.rows_with_death_count,
-        r.rows_with_vaccinated_count,
         r.case_count_completeness_pct,
         r.death_count_completeness_pct,
         r.vaccinated_completeness_pct,
