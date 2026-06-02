@@ -1,33 +1,32 @@
 # Naming Conventions
 
-This document outlines the naming conventions used across the WAHIS Animal Disease Analytics project, covering BigQuery objects, dbt models, Python scripts, columns, and Git branches.
+This document outlines the naming conventions used across the VetWatch project, covering BigQuery objects, dbt models, Python scripts, and Git branches.
 
 ## Table of Contents
 
 1. [General Principles](#general-principles)
-2. [BigQuery Dataset Naming](#bigquery-dataset-naming)
-3. [dbt Model Naming](#dbt-model-naming)
+2. [dbt Model Naming](#dbt-model-naming)
    - [Staging Layer](#staging-layer)
    - [Intermediate Layer](#intermediate-layer)
    - [Mart Layer](#mart-layer)
-4. [dbt Seeds](#dbt-seeds)
-5. [dbt Tests](#dbt-tests)
-6. [dbt Sources](#dbt-sources)
-7. [Column Naming Conventions](#column-naming-conventions)
+3. [dbt Seeds](#dbt-seeds)
+4. [dbt Tests](#dbt-tests)
+5. [dbt Sources](#dbt-sources)
+6. [Column Naming Conventions](#column-naming-conventions)
    - [General Column Rules](#general-column-rules)
    - [Keys and IDs](#keys-and-ids)
    - [Date and Time Columns](#date-and-time-columns)
    - [Boolean Columns](#boolean-columns)
    - [Metric Columns](#metric-columns)
-8. [Python Script Naming](#python-script-naming)
-9. [Git Branch Naming](#git-branch-naming)
-10. [Commit Message Conventions](#commit-message-conventions)
+7. [Python Script Naming](#python-script-naming)
+8. [Git Branch Naming](#git-branch-naming)
+9. [Commit Message Conventions](#commit-message-conventions)
 
 ---
 
 ## General Principles
 
-- **Naming style:** Use `snake_case` throughout — lowercase letters and underscores to separate words. No camelCase, no hyphens in object names.
+- **Naming style:** Use `snake_case` throughout — lowercase letters and underscores to separate words.
 - **Language:** English for all names.
 - **Clarity over brevity:** Prefer descriptive names over abbreviations. `outbreak_case_count` is better than `ob_cnt`.
 - **Avoid reserved words:** Do not use SQL or BigQuery reserved words as object or column names (e.g. `date`, `year`, `table`, `select`).
@@ -35,27 +34,9 @@ This document outlines the naming conventions used across the WAHIS Animal Disea
 
 ---
 
-## BigQuery Dataset Naming
-
-BigQuery datasets represent layers in the pipeline. Each dataset maps to a stage in the transformation flow.
-
-| Dataset | Purpose |
-|---------|---------|
-| `wahis_raw` | Raw data loaded directly from the CSV — no transformations |
-| `wahis_dev` | dbt development environment output |
-| `wahis_prod` | dbt production environment output |
-
-**Pattern:** `<project>_<environment>`
-
-The dbt staging, intermediate, and mart models all write to either `wahis_dev` or `wahis_prod` depending on the target environment. The `wahis_raw` dataset is written to by the Python ingestion scripts only and is never modified by dbt.
-
----
-
 ## dbt Model Naming
 
 ### Staging Layer
-
-Staging models sit directly on top of raw source tables. They rename columns, cast types, and standardise values. No business logic or joins.
 
 **Pattern:** `stg_<source>__<entity>.sql`
 
@@ -68,13 +49,10 @@ Staging models sit directly on top of raw source tables. They rename columns, ca
 | Model | Description |
 |-------|-------------|
 | `stg_wahis__outbreaks.sql` | Staged outbreak records from the raw CSV |
-| `stg_wahis__diseases.sql` | Staged disease reference data (if separated) |
 
 ---
 
 ### Intermediate Layer
-
-Intermediate models contain business logic — joins, enrichment, derived fields. They are not intended to be queried directly by analysts or dashboards.
 
 **Pattern:** `int_<entity>_<transformation>.sql`
 
@@ -86,13 +64,10 @@ Intermediate models contain business logic — joins, enrichment, derived fields
 | Model | Description |
 |-------|-------------|
 | `int_outbreaks_enriched.sql` | Outbreaks joined to disease categories and region metadata |
-| `int_country_reporting_quality.sql` | Per-country completeness metrics derived from outbreak records |
 
 ---
 
 ### Mart Layer
-
-Mart models are wide, flat, analysis-ready tables. They are the final output of the dbt project and the direct data source for Looker Studio.
 
 **Pattern:** `mart_<entity>.sql`
 
@@ -103,18 +78,14 @@ Mart models are wide, flat, analysis-ready tables. They are the final output of 
 | Model | Description |
 |-------|-------------|
 | `mart_disease_trends.sql` | Outbreak counts by disease, species, and semester — feeds the trend dashboard page |
-| `mart_country_summary.sql` | Per-country outbreak totals and reporting quality score — feeds the geographic and data quality pages |
-| `mart_outbreak_detail.sql` | Flat, analysis-ready record of all outbreak events |
 
 ---
 
 ## dbt Seeds
 
-Seeds are static CSV reference files stored in `/dbt/seeds/` and loaded into BigQuery with `dbt seed`.
-
 **Pattern:** `<entity>.csv`
 
-No prefix needed — seeds are small reference tables and their location in `/seeds/` makes their nature clear.
+No prefix needed.
 
 **Examples:**
 
@@ -134,8 +105,7 @@ Generic tests (not_null, unique, accepted_values) are defined in `schema.yml` fi
 
 | Test file | Description |
 |-----------|-------------|
-| `test_semester_year_not_null.sql` | Confirms year and semester are always populated |
-| `test_new_outbreaks_not_negative.sql` | Confirms new outbreak counts are never negative |
+| `test_report_year_in_range.sql` | Confirms year range is between 2005 and 2025. |
 
 ---
 
@@ -223,10 +193,9 @@ Python scripts in `/ingestion/` are named to describe their single responsibilit
 | Script | Description |
 |--------|-------------|
 | `fetch_wahis.py` | Downloads the raw CSV from the WAHIS portal |
-| `clean_wahis.py` | Standardises columns, handles nulls, classifies row types |
 | `load_to_bigquery.py` | Loads the clean CSV into the BigQuery raw dataset |
 
-Scripts are designed to be run in order: fetch → clean → load. Each script has one job and can be run independently if needed.
+Scripts are designed to be run in order: fetch (+/- clean) → load. Each script has one job and can be run independently if needed.
 
 ---
 
