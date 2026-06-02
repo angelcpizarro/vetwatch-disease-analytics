@@ -40,7 +40,7 @@ enriched as (
         o.susceptible_count,
         o.measuring_units,
 
-        -- derives rows by source type: 'SMR' or 'IN_FUR'
+        -- classifies rows by source type: 'SMR' or 'IN_FUR'
         case
             when o.outbreak_id is null then 'SMR'
             else 'IN_FUR'

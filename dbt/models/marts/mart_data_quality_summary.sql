@@ -2,7 +2,7 @@ with reporting_quality as (
     select * from {{ ref('int_country_reporting_quality') }}
 ),
 
--- get most common region per country to resolve inconsistencies 
+-- gets most common region per country to resolve inconsistencies 
 -- (i.e. one country in more than one world region)
 country_regions as (
     select
