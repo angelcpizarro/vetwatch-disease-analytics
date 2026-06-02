@@ -37,7 +37,7 @@ completed_reporting_quality as (
         round(
             (rows_with_vaccinated_count)
             / nullif(total_detailed_rows, 0) * 100, 1
-        )                                               as vaccinated_completeness_pct,
+        )                                               as vaccinated_count_completeness_pct,
 
         -- composite quality score (%)
         round(

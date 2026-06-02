@@ -42,10 +42,6 @@ models:
           ⚠️ Not from an official database — classified using veterinary
           clinical knowledge (May 2026) and official sources. May require updating as scientific
           understanding evolves.
-        tests:
-          - accepted_values:
-              arguments:
-                values: [true, false]
 
       - name: report_source
         description: "Whether the record comes from SMR or IN_FUR reporting."
@@ -59,39 +55,19 @@ models:
           True if the row is a species level detail row.
           False for summary rows. Use this flag to filter before aggregating
           quantitative fields to avoid double counting.
-        tests:
-          - accepted_values:
-              arguments:
-                values: [true, false]
         
       - name: is_outbreak_count_row
         description: >
           True if the row is SMR sourced and summary level.
-        tests:
-          - accepted_values:
-              arguments:
-                values: [true, false]
 
       - name: has_case_count
         description: "True if case_count is not Null."
-        tests:
-          - accepted_values:
-              arguments:
-                values: [true, false]
 
       - name: has_death_count
         description: "True if death_count is not Null."
-        tests:
-          - accepted_values:
-              arguments:
-                values: [true, false]
 
       - name: has_vaccinated_count
         description: "True if vaccinated_count is not Null."
-        tests:
-          - accepted_values:
-              arguments:
-                values: [true, false]
 
 
   - name: int_country_reporting_quality

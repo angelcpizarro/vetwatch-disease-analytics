@@ -30,7 +30,7 @@ summary as (
         r.total_outbreaks,
         r.case_count_completeness_pct,
         r.death_count_completeness_pct,
-        r.vaccinated_completeness_pct,
+        r.vaccinated_count_completeness_pct,
         r.composite_quality_score,
         case
             when r.composite_quality_score >= 70 then 'High'
