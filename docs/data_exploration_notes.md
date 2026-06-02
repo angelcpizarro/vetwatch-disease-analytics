@@ -13,9 +13,7 @@
 
 ## Overview
 
-This document records the initial exploration of the WAHIS (World Animal Health Information System) data source used in this project. It covers the structure of the CSV export, known data quality issues, and decisions made as a result of exploration.
-
-For a summary of the data source, see the [README](../README.md).
+This document records the initial exploration of the WAHIS (World Animal Health Information System) dataset used in this project. It covers the structure of the CSV export, known data quality issues, and decisions made as a result of exploration.
 
 ---
 
@@ -26,21 +24,13 @@ The WAHIS quantitative export combines records from two underlying report types,
 - **Six-monthly reports (SMR):** `Outbreak_id` is blank (`-`). These are aggregated summaries submitted by member countries every six months.
 - **Immediate notifications and follow-up reports (IN/FUR):** `Outbreak_id` is populated. These are event-level records submitted in real-time when a notifiable disease event occurs.
 
-When the same outbreak appears in both SMR and IN/FUR, WAHIS only retains the SMR record in the export to avoid duplication.
+To avoid duplication of outbreaks in IN/FUR, only one species in an outbreak contains the “new outbreak” count while the rest show “0”. This does not affect the summation of outbreaks nor the other quantitative data (Susceptible, Cases, etc.).
 
 **`New outbreaks` count behaviour:**
-- **IN/FUR:** Only one species row per outbreak carries the count — the remaining rows show `0`
-- **SMR:** The count appears on the summary row — detail-level rows show `-`
+- **IN/FUR:** Only one species row per outbreak carries the count `1` — the remaining rows show `0`
+- **SMR:** The count appears on the summary row — detail-level rows show `-`. Summary rows contain `New outbreaks` for aggregation later in the analysis.
 
----
-
-## Row Grain
-
-**One row = one species, within one outbreak event, within one administrative division, within one semester.**
-
-*A single H5N1 outbreak in Austria affecting three bird species across two regions will therefore appear as multiple rows.*
-
-For IN/FUR records, only one species row per outbreak carries the New outbreaks count — the remaining rows show 0 to avoid double counting.
+Both IN/FUR rows and detailed SMR rows contain the quantitative data (species level) for more in detail quantitative analysis.
 
 ---
 
@@ -101,7 +91,7 @@ To determine the appropriate year range for the project, row counts per year wer
 **Key observations:**
 
 - Row counts are remarkably consistent across the full period, ranging between ~25,000 and ~36,000 rows per year.
-- The dip in 2020 (27,787 rows) is consistent with COVID-19 disrupting global veterinary surveillance and reporting. 
+- The dip in 2020 (27,787 rows) could be consistent with COVID-19 disrupting global veterinary surveillance and reporting. 
 - 2025 shows a lower row count (25,144) probably because the Jul-Dec 2025 semester has not yet been fully submitted by member countries given possible reporting lags. 2025 is therefore excluded from the project scope.
 
 **Decision:** Year range set to **2005–2024**, giving a clean 20-year window of complete data.
@@ -114,11 +104,11 @@ To determine the appropriate year range for the project, row counts per year wer
 
 Throughout the quantitative fields (`Cases`, `Deaths`, `Killed and disposed of`, `Slaughtered`, `Vaccinated`, `Susceptible`), missing data is represented as a hyphen (`-`) rather than an empty cell or null. This is the most obvious quality issue in the dataset.
 
-**Implication:** The cleaning script will replace `-` with `NULL` before loading to BigQuery.
+**Implication:** The ingestion script will replace `-` with `NULL` before loading to BigQuery.
 
 ### 2. Two-tier row structure in SMR records
 
-SMR records follow a pattern of one summary row (where `Species` is blank and most quantitative fields are `-`) followed by one or more species-level detail rows with actual counts. For example:
+SMR records follow a pattern of one summary row (where `Species` is blank) followed by one or more species-level detail rows with actual counts. For example:
 
 ```
 Albania | Anthrax | Both animal categories | Species: - | New outbreaks: 1 | Cases: -
@@ -126,13 +116,13 @@ Albania | Anthrax | Domestic | Sheep/goats  | New outbreaks: - | Cases: 3
 Albania | Anthrax | Domestic | Cattle        | New outbreaks: - | Cases: 5
 ```
 
-**Implication:** The staging model should distinguish between summary rows and detail rows. For quantitative analysis, only detail rows (where `Species` is populated) should be used. Summary rows are useful only for outbreak counts.
+**Implication:** The intermediate model should distinguish between summary rows and detail rows. For detailed quantitative analysis, only detail rows (where `Species` is populated) should be used. Summary rows are useful only for outbreak counts.
 
 ### 3. No exact dates — semester granularity only
 
 The finest time resolution available is a six-month semester (e.g. `Jan-Jun 2023`). Exact outbreak start and end dates are not available in the CSV export.
 
-**Implication:** Time-series analysis in this project is at semester or annual granularity.
+**Implication:** Time analysis in this project will be at annual level.
 
 ### 4. Disease names are long and unstandardised
 
@@ -142,13 +132,7 @@ Disease names use the full WAHIS formal nomenclature, including taxonomic qualif
 Influenza A viruses of high pathogenicity (Inf. with) (non-poultry including wild birds) (2017-)
 ```
 
-**Implication:** A `disease_categories` seed file will be created in dbt to map raw disease names to clean short names and broader categories (e.g. Avian, Livestock, Wildlife). This will be helpful for any aggregation by disease.
-
-### 5. `Event_id` and `Outbreak_id` are blank for SMR records
-
-SMR-sourced rows do not carry event or outbreak IDs, meaning they cannot be traced to a specific notifiable event.
-
-**Implication:** Any analysis requiring event-level traceability must use IN/FUR records only. This will be reflected in the data quality mart model as a completeness metric.
+**Implication:** A `disease_categories` seed file will be created in dbt to map raw disease names to clean short names and broader categories (e.g. Avian, Livestock, Wildlife). This will be helpful for any aggregation by disease and also for a clearer visualisation in a dashboard.
 
 ---
 
@@ -157,8 +141,7 @@ SMR-sourced rows do not carry event or outbreak IDs, meaning they cannot be trac
 | Decision | Rationale |
 |----------|-----------|
 | Year range set to 2005–2024 | Row counts are consistent across the full period with no quality deterioration in earlier years. 2025 excluded as the Jul-Dec semester is probably not yet fully reported. |
-| 2020 dip flagged as an anomaly | Row count drops to 27,787 in 2020, consistent with COVID-19 disrupting global veterinary surveillance. To be annotated on the dashboard. |
-| Replace `-` with NULL in cleaning script | Prevents silent corruption of quantitative analysis |
-| Filter to detail rows only for quantitative models | Summary rows duplicate outbreak counts already present in the detail rows, which would double count new_outbreaks. |
+| Replace `-` with NULL in the ingestion script | Prepares the data before loading to BigQuery |
+| Filter to detail rows only for detailed quantitative models | SMR summary rows only for outbreak counts and detailed rows for more detailed quantitative analysis. |
 | Build `disease_categories` seed file in dbt | Raw disease names are too long and inconsistent for direct use. |
 | API integration deprioritised | Adds complexity without improving the analytical output for this project |
