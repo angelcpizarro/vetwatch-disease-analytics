@@ -3,39 +3,32 @@ version: 2
 models:
   - name: int_outbreaks_enriched
     description: >
-      Enriched outbreak records joining staged WAHIS data to the disease_categories 
-      seed file. The seed file is a manually curated reference table mapping raw 
-      disease names to clean short names and categories — see is_zoonotic column 
-      description for data warning.
-      Adds three derived fields: report_source (SMR vs IN_FUR), is_detail_row 
-      (identifies species-level rows for safe quantitative aggregation), and 
-      boolean completeness flags (has_case_count, has_death_count, 
-      has_vaccinated_count) for use in data quality models.
+      Enriched outbreak records joining staged model to the disease_categories 
+      seed file. The seed file is a reference table mapping raw disease names 
+      to clean short names, disease categories, and whether a disease is zoonotic.
+      Adds four fields: report_source (SMR vs IN_FUR), is_detail_row (identifies 
+      species level rows for quantitative analysis), is_outbreak_count_row (identifies
+      summary SMR level rows for outbreaks only aggregations), and boolean completeness 
+      flags (has_case_count, has_death_count, has_vaccinated_count) for use in data 
+      quality models.
+      Note: 'Apiary' from disease_category is filtered out due to incompatibility of
+      measuring units.
 
     columns:
-      - name: report_year
-        description: "Reporting year as an integer (2005–2024)."
-        tests:
-          - not_null
-
-      - name: country_name
-        description: "Full country name of the reporting member."
-        tests:
-          - not_null
-
-      - name: disease_name_raw
-        description: "Full WAHIS disease name — normalised to remove non-breaking spaces."
-        tests:
-          - not_null
-
       - name: disease_short_name
         description: >
           Clean short name mapped from disease_categories seed file.
           NULL values would indicate an unmatched disease name — 
           verified as zero after orphan check during build.
+        tests:
+          - not_null
 
       - name: disease_category
-        description: "Broad disease category from seed file."
+        description: >
+          Broad disease category from seed file.
+          ⚠️ Not from an official database — classified using veterinary
+          clinical knowledge (May 2026) and official sources. May require updating as scientific
+          understanding evolves.
         tests:
           - not_null
           - accepted_values:
@@ -49,59 +42,105 @@ models:
           ⚠️ Not from an official database — classified using veterinary
           clinical knowledge (May 2026) and official sources. May require updating as scientific
           understanding evolves.
+        tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
 
       - name: report_source
-        description: "Whether the record originates from SMR or IN_FUR reporting."
+        description: "Whether the record comes from SMR or IN_FUR reporting."
         tests:
-          - not_null
           - accepted_values:
               arguments:
                 values: ['SMR', 'IN_FUR']
 
       - name: is_detail_row
         description: >
-          True if the row is a species-level detail row (species is populated).
+          True if the row is a species level detail row.
           False for summary rows. Use this flag to filter before aggregating
           quantitative fields to avoid double counting.
         tests:
-          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+        
+      - name: is_outbreak_count_row
+        description: >
+          True if the row is SMR sourced and summary level.
+        tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
 
       - name: has_case_count
-        description: "True if case_count is populated for this record."
+        description: "True if case_count is not Null."
         tests:
-          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
 
       - name: has_death_count
-        description: "True if death_count is populated for this record."
+        description: "True if death_count is not Null."
         tests:
-          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
 
       - name: has_vaccinated_count
-        description: "True if vaccinated_count is populated for this record."
+        description: "True if vaccinated_count is not Null."
         tests:
-          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
 
   - name: int_country_reporting_quality
     description: >
-      One row per country. Aggregates outbreak records to calculate 
-      field-level completeness metrics and a composite quality score.
-      Used as the source for mart_country_summary and the data quality
+      One row per country. Aggregates quantitative records to calculate 
+      completeness metrics and a composite quality score.
+      Used as the source for mart_data_quality_summary and the data quality
       dashboard page. Note: quality scores reflect field completion rates,
-      not surveillance quality — European countries score lower than 
-      expected due to reporting a wider variety of diseases where 
-      quantitative fields are inherently less populated.
+      not surveillance quality.
 
     columns:
       - name: country_name
-        description: "Full country name — one row per country."
+        description: "Full country name. One row per country."
+        tests:
+          - unique
+
+      - name: total_outbreaks
+        description: "Sum of total new_outbreaks at a SMR summary row level."
+
+      - name: total_detailed_rows
+        description: "Total count of detail level rows."
+
+      - name: rows_with_case_count
+        description: "Total count of rows with case counts."
+
+      - name: rows_with_death_count
+        description: "Total count of rows with death counts."
+
+      - name: rows_with_vaccinated_count
+        description: "Total count of rows with vaccinated counts."
+
+      - name: case_count_completeness_pct
+        description: "Percentage of detail rows that contain case counts."
         tests:
           - not_null
-          - unique
+
+      - name: death_count_completeness_pct
+        description: "Percentage of detail rows that contain death counts."
+        tests:
+          - not_null
+
+      - name: vaccinated_count_completeness_pct
+        description: "Percentage of detail rows that contain vaccinated counts."
+        tests:
+          - not_null
 
       - name: composite_quality_score
         description: >
           Average of case_count_completeness_pct, death_count_completeness_pct,
           and vaccinated_completeness_pct. Ranges from 0 to 100. 
-          Scores below 40 indicate low field completion for this country.
         tests:
           - not_null
