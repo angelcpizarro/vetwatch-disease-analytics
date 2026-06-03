@@ -3,13 +3,13 @@
 
 VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WAHIS (World Organisation for Animal Health), covering 180+ countries and 100+ diseases. The central analytical question is: *What do 20 years of global animal disease surveillance data reveal about outbreak reporting patterns, and how reliable is the data behind them?*
 
-Most analytical projects treat data quality as a constraint to work around. This project highlights the importance of data quality and governance. To do so, a data quality layer is built directly into the dbt mart models, reporting completeness by country and region.
+This project highlights the importance of data quality and governance. To do so, a data quality layer is built directly into the dbt mart models, reporting completeness by country and region.
 
 The project is structured around three questions:
 
 **🦠 Disease Trends** — Which diseases and disease categories show the highest outbreak reporting, and how has that changed over 20 years?
 
-**🌍 Goegraphic Breakdown** — How are reported outbreaks distributed globally across regions and countries?
+**🌍 Geographic Breakdown** — How are reported outbreaks distributed globally across regions and countries?
 
 **🔍 Data Quality** — Which countries and regions show the highest data completeness, and what does that reveal about the reliability of global disease reporting?
 
