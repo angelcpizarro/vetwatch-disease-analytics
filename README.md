@@ -1,17 +1,17 @@
 # VetWatch: Global Animal Disease Analytics
 *In progress*
 
-This project analyses 20 years of animal disease outbreak data from WAHIS (World Organisation for Animal Health), covering 180+ countries and 100+ diseases. The central analytical question is: *what do global outbreak patterns reveal about disease burden — and how much can we trust the data behind them?*
+VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WAHIS (World Organisation for Animal Health), covering 180+ countries and 100+ diseases. The central analytical question is: *What do 20 years of global animal disease surveillance data reveal about outbreak reporting patterns, and how reliable is the data behind them?*
 
-Most analytical projects treat data quality as a constraint to work around. This project treats it as a finding in its own right. A data quality layer is built directly into the dbt mart models, surfacing reporting completeness by country and region alongside the trend analysis.
+Most analytical projects treat data quality as a constraint to work around. This project highlights the importance of data quality and governance. To do so, a data quality layer is built directly into the dbt mart models, reporting completeness by country and region.
 
 The project is structured around three questions:
 
-**🦠 Disease trends** — Which diseases, species, and regions show the highest outbreak frequency, and how has that changed over 20 years?
+**🦠 Disease Trends** — Which diseases and disease categories show the highest outbreak reporting, and how has that changed over 20 years?
 
-**🌍 Surveillance vs burden** — Does a high outbreak count reflect genuine disease pressure, or strong reporting infrastructure? And does that distinction vary by region?
+**🌍 Goegraphic Breakdown** — How are reported outbreaks distributed globally across regions and countries?
 
-**🔍 Data reliability** — How complete and consistent is the underlying data, and where should a downstream analyst be cautious about drawing conclusions?
+**🔍 Data Quality** — Which countries and regions show the highest data completeness, and what does that reveal about the reliability of global disease reporting?
 
 ---
 
@@ -19,7 +19,7 @@ The project is structured around three questions:
 
 | Layer | Tool |
 |-------|------|
-| Ingestion & cleaning | Python |
+| Ingestion & minimal cleaning | Python |
 | Data warehouse | BigQuery |
 | Transformation & modelling | dbt |
 | Visualisation | Looker Studio |
@@ -29,13 +29,13 @@ The project is structured around three questions:
 
 ## 🗂️ Data Source
 
-The project ingests the WAHIS quantitative six-monthly report from 2005 to 2024 — a publicly available CSV export from the World Organisation for Animal Health covering 20 years of animal disease outbreak events globally.
+The project ingests the WAHIS quantitative six-monthly report from 2005 to 2024. This is a publicly available CSV export from the World Organisation for Animal Health of animal disease outbreak events globally.
 
 The data is available at [wahis.woah.org](https://wahis.woah.org) under **Six-monthly reports → Quantitative data**. No account is required to download it.
 
 An API integration was considered to simulate how production pipelines work with multiple source types simultaneously, but was deprioritised in favour of building robust transformation and data quality layers.
 
-> For detailed notes on the data structure, quality issues, and decisions made during initial exploration, see [`docs/data_exploration_notes.md`](docs/data_exploration_notes.md).
+> For detailed notes on the data source and its structure, quality issues found, and decisions made during initial exploration, see [`docs/data_exploration_notes.md`](docs/data_exploration_notes.md).
 
 ---
 
@@ -50,25 +50,24 @@ Dataset:       wahis.woah.org (CSV)
                       │
                       ▼
 Ingestion:     Python scripts
-               ├── fetch_wahis.py       — download raw CSV
-               ├── clean_wahis.py       — standardise, handle nulls, classify row types
-               └── load_to_bigquery.py  — load clean data to BigQuery
+               ├── fetch_wahis.py       — download raw CSV, standardise column names and handle null values
+               └── load_to_bigquery.py  — load data to BigQuery
                       │
                       ▼
 Warehouse:     BigQuery (wahis_raw)
                       │
                       ▼
 Transform:     dbt project (wahis_analytics)
-               ├── Staging              — typed, renamed, one model per source table
-               ├── Intermediate         — enriched, joined, business logic
-               ├── Marts                — analysis-ready tables feeding the dashboard
-               └── Tests                — not_null, unique, accepted_values, custom tests
+               ├── Staging              — trim and cast
+               ├── Intermediate         — enriched, quality metrics (aggregations)
+               ├── Marts                — analysis-ready tables for the dashboard
+               └── Tests                — Built-in and custom tests
                       │
                       ▼
 Serve:         Looker Studio dashboard
-               ├── Page 1 — Disease trends
-               ├── Page 2 — Geographic breakdown
-               └── Page 3 — Data quality scorecard
+               ├── Page 1 — Disease Trends
+               ├── Page 2 — Geographic Breakdown
+               └── Page 3 — Data Quality
 ```
 
 ---
@@ -80,7 +79,6 @@ vetwatch-global-animal-disease-analytics/
 │
 ├── ingestion/                   # Python ingestion scripts
 │   ├── fetch_wahis.py
-│   ├── clean_wahis.py
 │   └── load_to_bigquery.py
 │
 ├── dbt/                         # dbt project
