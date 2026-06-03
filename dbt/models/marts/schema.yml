@@ -25,7 +25,7 @@ models:
     description: >
       One row per country. Contains total outbreak counts, percentage of
       completeness per parameter, composite quality score, and quality band 
-      classification. 
+      classification. Also contains world region as a label for each country.
       Primary data source for the data quality dashboard page.
 
     columns:

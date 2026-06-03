@@ -89,7 +89,36 @@ enriched_with_flags as (
             then true else false
         end                                          as has_vaccinated_count
     from enriched
+),
+
+-- gets most common region per country to resolve inconsistencies 
+-- (i.e. one country in more than one world region)
+region_lookup as (
+    select
+        country_name,
+        world_region,
+        row_number() over (
+            partition by country_name
+            order by count(*) desc
+        ) as rn
+    from enriched_with_flags
+    group by 1, 2
+),
+
+resolved_regions as (
+    select country_name, world_region
+    from region_lookup
+    where rn = 1
+),
+
+final as (
+    select
+        e.* except(world_region),
+        r.world_region
+    from enriched_with_flags e
+    left join resolved_regions r
+        on e.country_name = r.country_name
 )
 
-select * from enriched_with_flags
+select * from final
 where disease_category != 'Apiary'
