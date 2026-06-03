@@ -11,10 +11,19 @@ models:
       summary SMR level rows for outbreaks only aggregations), and boolean completeness 
       flags (has_case_count, has_death_count, has_vaccinated_count) for use in data 
       quality models.
+      World region inconsistencies (countries appearing under multiple regions in the 
+      source data) are resolved by selecting the most frequently occurring region per 
+      country.
       Note: 'Apiary' from disease_category is filtered out due to incompatibility of
       measuring units.
 
     columns:
+      - name: world_region
+        description: >
+          World region of the reporting country. Inconsistencies in the source 
+          data (countries appearing under multiple regions) are resolved by selecting 
+          the most frequently occurring region per country.
+
       - name: disease_short_name
         description: >
           Clean short name mapped from disease_categories seed file.
@@ -33,7 +42,7 @@ models:
           - not_null
           - accepted_values:
               arguments:
-                values: ['Avian', 'Livestock', 'Swine', 'Equine', 'Aquatic', 'Apiary', 'Wildlife', 'Multi-species']
+                values: ['Avian', 'Livestock', 'Swine', 'Equine', 'Aquatic', 'Wildlife', 'Multi-species']
       
       - name: is_zoonotic
         description: >
@@ -83,6 +92,9 @@ models:
         description: "Full country name. One row per country."
         tests:
           - unique
+      
+      - name: world_region
+        description: "One consistent region per country."
 
       - name: total_outbreaks
         description: "Sum of total new_outbreaks at a SMR summary row level."

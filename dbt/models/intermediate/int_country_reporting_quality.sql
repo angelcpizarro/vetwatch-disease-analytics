@@ -49,6 +49,17 @@ completed_reporting_quality as (
         )                                               as composite_quality_score
 
     from reporting_quality
+),
+
+-- add world region after all country-level analysis is complete
+country_regions as (
+    select distinct country_name, world_region
+    from outbreaks
 )
 
-select * from completed_reporting_quality
+select
+    c.world_region,
+    r.*
+from completed_reporting_quality r
+left join country_regions c
+    on r.country_name = c.country_name
