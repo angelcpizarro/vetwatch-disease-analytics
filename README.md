@@ -35,7 +35,7 @@ The data is available at [wahis.woah.org](https://wahis.woah.org) under **Six-mo
 
 An API integration was considered to simulate how production pipelines work with multiple source types simultaneously, but was deprioritised in favour of building robust transformation and data quality layers.
 
-> For detailed notes on the data source and its structure, quality issues found, and decisions made during initial exploration, see [`docs/data_exploration_notes.md`](docs/data_exploration_notes.md).
+> For detailed notes on the data source and its structure, quality issues found, and decisions made during initial exploration — see [`docs/data_exploration_notes.md`](docs/data_exploration_notes.md).
 
 ---
 
@@ -108,62 +108,7 @@ vetwatch-global-animal-disease-analytics/
 
 ## ⚙️ How to Run
 
-### Prerequisites
-
-- Python 3.9+
-- A Google Cloud project with BigQuery enabled
-- A service account with BigQuery Admin role
-- dbt-bigquery installed
-
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/angelcpizarro/wahis-animal-disease-analytics.git
-cd wahis-animal-disease-analytics
-```
-
-### 2. Set up Python environment
-
-```bash
-python -m venv venv
-source venv/bin/activate        # Mac/Linux
-venv\Scripts\activate           # Windows
-pip install -r requirements.txt
-```
-
-### 3. Configure credentials
-
-Copy `.env.example` to `.env` and fill in your Google Cloud details:
-
-```bash
-cp .env.example .env
-```
-
-Then open `.env` and add your credentials:
-
-```
-GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
-GCP_PROJECT_ID=your-gcp-project-id
-BQ_DATASET=wahis_raw
-```
-
-### 4. Run the ingestion pipeline
-
-```bash
-python ingestion/fetch_wahis.py
-python ingestion/clean_wahis.py
-python ingestion/load_to_bigquery.py
-```
-
-### 5. Run dbt
-
-```bash
-cd dbt
-dbt seed          # load reference data
-dbt build         # run models and tests
-dbt docs generate # generate documentation
-dbt docs serve    # view documentation in browser
-```
+> Full setup and run instructions are available in [`docs/how_to_run.md`](docs/how_to_run.md).
 
 ---
 
@@ -176,12 +121,6 @@ dbt docs serve    # view documentation in browser
 ## 💡 Key Findings
 
 *To be completed once analysis is finalised.*
-
----
-
-## ☑️ Skills Demonstrated
-
-*To be completed once the project is finished.*
 
 ---
 
