@@ -40,7 +40,7 @@ An API integration was considered to simulate how production pipelines work with
 
 The data management approach follows a modern analytics engineering pattern, with a layered dbt architecture (staging → intermediate → marts) respecting Separation of Concerns.
 
-![architecture_diagram.png]()
+![architecture_diagram.png](https://github.com/angelcpizarro/vetwatch-disease-analytics/blob/main/docs/architecture_diagram.png?raw=true)
 
 ---
 
@@ -85,12 +85,13 @@ vetwatch-disease-analytics/
 │   ├── problems_and_solutions.md
 │   └── lineage_dag.png
 │
-├── dashboards/                  # Dashboard screenshots
-│   ├── screenshot_disease_trends.png
-│   ├── screenshot_geographic_breakdown.png
-│   └── screenshot_data_quality.png
+├── dashboards/                  
+│   ├── dashboard_page1.png      # Dashboard screenshots
+│   ├── dashboard_page2.png
+│   ├── dashboard_page3.png
+│   └── vetwatch_dashboard.pdf   # Flat version of dashboard
 │
-├── .env.example                 # Example environment variables (no secrets)
+├── .env.example                 # Example (no secrets)
 ├── .gitignore
 ├── requirements.txt
 ├── dbt_project.yml
@@ -110,7 +111,7 @@ vetwatch-disease-analytics/
 [VetWatch Dashboard](https://datastudio.google.com/reporting/0e63afda-0f13-45cf-bce7-31d5d90c8737) — Interactive dashboard with three pages covering disease trends, geographic breakdown, and data quality analysis.
 
 ### *Preview of the dashboard: Disease Trends (page 1)*
-![screenshot_disease_trends.png]()
+![dashboard_page1.png](https://github.com/angelcpizarro/vetwatch-disease-analytics/blob/main/dashboards/dashboard_page1.png?raw=true)
 
 ---
 
