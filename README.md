@@ -1,9 +1,6 @@
 # VetWatch: Global Animal Disease Analytics
-*In progress*
 
-VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WAHIS (World Organisation for Animal Health), covering 180+ countries and 100+ diseases. The central analytical question is: *What do 20 years of global animal disease surveillance data reveal about outbreak reporting patterns, and how reliable is the data behind them?*
-
-This project highlights the importance of data quality and governance. To do so, a data quality layer is built directly into the dbt mart models, reporting completeness by country and region.
+VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WAHIS, covering 201 countries and 172 diseases. The project goes beyond trend analysis — a data quality layer is built directly into the dbt models, exposing reporting completeness by country and region alongside the outbreak patterns. The result is a project that asks not just what the data shows, but how much we can trust it.
 
 The project is structured around three questions:
 
@@ -44,31 +41,6 @@ An API integration was considered to simulate how production pipelines work with
 The data management approach follows a modern analytics engineering pattern, with a layered dbt architecture (staging → intermediate → marts) respecting Separation of Concerns.
 
 *Architecture diagram coming soon*
-
-```
-Dataset:       wahis.woah.org (CSV)
-                      │
-                      ▼
-Ingestion:     Python scripts
-               ├── fetch_wahis.py       — download raw CSV, standardise column names and handle null values
-               └── load_to_bigquery.py  — load data to BigQuery
-                      │
-                      ▼
-Warehouse:     BigQuery (wahis_raw)
-                      │
-                      ▼
-Transform:     dbt project (wahis_analytics)
-               ├── Staging              — trim and cast
-               ├── Intermediate         — enriched, quality metrics (aggregations)
-               ├── Marts                — analysis-ready tables for the dashboard
-               └── Tests                — Built-in and custom tests
-                      │
-                      ▼
-Serve:         Looker Studio dashboard
-               ├── Page 1 — Disease Trends
-               ├── Page 2 — Geographic Breakdown
-               └── Page 3 — Data Quality
-```
 
 ---
 
@@ -114,13 +86,25 @@ vetwatch-global-animal-disease-analytics/
 
 ## 📊 Dashboard
 
-*Link to be added once the dashboard is published.*
+[VetWatch Dashboard](https://datastudio.google.com/reporting/0e63afda-0f13-45cf-bce7-31d5d90c8737) — Interactive dashboard with three pages covering disease trends, geographic breakdown, and data quality analysis.
 
 ---
 
 ## 💡 Key Findings
 
-*To be completed once analysis is finalised.*
+The analysis of 4,126,257 animal disease outbreak records across 201 countries and 20 years reveals three headline findings:
+
+**Disease trends**
+Livestock diseases dominate global outbreak reporting (48.9%), led by Brucellosis, Echinococcus granulosus, and Bovine TB. Two significant events stand out: a severe FMD outbreak in Indonesia in 2022 ended the country's FMD-free status maintained since 1990, and Chile's Echinococcus granulosus reporting surged from 0 to 105,394 between 2018–2020 before returning to 0 — likely reflecting a reporting methodology change rather than a genuine disease emergence considering Echinococcus granulosus is an endemic disease in Chile.
+
+**Geographic distribution**
+The Americas, Europe, and Asia account for over 74% of all reported outbreaks. Iran leads globally with 435,700 outbreaks, followed by China and Chile. Whether high outbreak counts reflect genuine disease burden or strong reporting infrastructure cannot be determined from reporting data alone.
+
+**Data quality**
+The global average composite quality score is 71.5%, but varies significantly by region. Counterintuitively, the Middle East and Africa lead on data quality (78.6% and 78.5%) despite not being the highest outbreak-reporting regions — directly demonstrating that outbreak volume and reporting quality are not correlated. Vaccination reporting is the weakest metric globally (51.2%), compared to case reporting (87.8%) and death reporting (75.5%).
+
+> Full findings with data points and limitations are available in [`docs/analytical_findings.md`](docs/analytical_findings.md).
+> For a detailed report of technical problems found during the build and how they were resolved — see [`docs/problems_and_solutions.md`](docs/problems_and_solutions.md).
 
 ---
 

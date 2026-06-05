@@ -2,8 +2,6 @@
 
 ## Table of Contents
 
-## Table of Contents
-
 1. [Overview](#overview)
 2. [Ingestion Layer](#ingestion-layer)
    - [Problem 1 — BigQuery dataset didn't exist](#problem-1--bigquery-dataset-didnt-exist)
