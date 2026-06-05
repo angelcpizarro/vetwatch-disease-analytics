@@ -1,6 +1,6 @@
 # VetWatch: Global Animal Disease Analytics
 
-VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WAHIS, covering 201 countries and 172 diseases. The project goes beyond trend analysis — a data quality layer is built directly into the dbt models, exposing reporting completeness by country and region alongside the outbreak patterns. The result is a project that asks not just what the data shows, but how much we can trust it.
+VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WAHIS (World Animal Health Information System), covering 201 countries and 172 diseases. This project intends to go beyond analysis and highlights the importance of data quality by building a model that quantifies reporting completeness of data by country and region alongside the outbreak patterns. The result is a project that explores not just what the data shows, but how much we can trust it.
 
 The project is structured around three questions:
 
@@ -40,14 +40,14 @@ An API integration was considered to simulate how production pipelines work with
 
 The data management approach follows a modern analytics engineering pattern, with a layered dbt architecture (staging → intermediate → marts) respecting Separation of Concerns.
 
-*Architecture diagram coming soon*
+![architecture_diagram.png]()
 
 ---
 
 ## 📁 Project Structure
 
 ```
-vetwatch-global-animal-disease-analytics/
+vetwatch-disease-analytics/
 │
 ├── ingestion/                   # Python ingestion scripts
 │   ├── fetch_wahis.py
@@ -56,23 +56,44 @@ vetwatch-global-animal-disease-analytics/
 ├── dbt/                         # dbt project
 │   ├── models/
 │   │   ├── staging/
+│   │   │   ├── schema.yml
+│   │   │   ├── sources.yml
+│   │   │   └── stg_wahis__outbreaks.sql
 │   │   ├── intermediate/
+│   │   │   ├── schema.yml
+│   │   │   ├── int_outbreaks_enriched.sql
+│   │   │   └── int_country_reporting_quality.sql
 │   │   └── marts/
+│   │       ├── schema.yml
+│   │       ├── mart_disease_trends.sql
+│   │       └── mart_data_quality_summary.sql
 │   ├── seeds/
 │   │   └── disease_categories.csv
 │   └── tests/
+│       ├── test_boolean_flags_valid.sql
+│       ├── test_no_unmatched_diseases.sql
+│       ├── test_quality_score_range.sql
+│       ├── test_report_year_in_range.sql
+│       └── test_quantitative_not_negative.sql
 │
 ├── docs/                        # Project documentation
 │   ├── data_exploration_notes.md
 │   ├── naming_conventions.md
 │   ├── architecture_diagram.png
+│   ├── how_to_run.md
+│   ├── analytical_findings.md
+│   ├── problems_and_solutions.md
 │   └── lineage_dag.png
 │
-├── dashboards/                  # Dashboard screenshots and exports
+├── dashboards/                  # Dashboard screenshots
+│   ├── screenshot_disease_trends.png
+│   ├── screenshot_geographic_breakdown.png
+│   └── screenshot_data_quality.png
 │
 ├── .env.example                 # Example environment variables (no secrets)
 ├── .gitignore
 ├── requirements.txt
+├── dbt_project.yml
 └── README.md
 ```
 
@@ -87,6 +108,9 @@ vetwatch-global-animal-disease-analytics/
 ## 📊 Dashboard
 
 [VetWatch Dashboard](https://datastudio.google.com/reporting/0e63afda-0f13-45cf-bce7-31d5d90c8737) — Interactive dashboard with three pages covering disease trends, geographic breakdown, and data quality analysis.
+
+### *Preview of the dashboard: Disease Trends (page 1)*
+![screenshot_disease_trends.png]()
 
 ---
 
