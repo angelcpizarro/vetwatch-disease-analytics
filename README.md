@@ -4,11 +4,11 @@ VetWatch is a data engineering and analytics portfolio project that analyses 20 
 
 The project is structured around three questions:
 
-**🦠 Disease Trends** — Which diseases and disease categories show the highest outbreak reporting, and how has that changed over 20 years?
+- **🦠 Disease Trends** — Which diseases and disease categories show the highest outbreak reporting, and how has that changed over 20 years?
 
-**🌍 Geographic Breakdown** — How are reported outbreaks distributed globally across regions and countries?
+- **🌍 Geographic Breakdown** — How are reported outbreaks distributed globally across regions and countries?
 
-**🔍 Data Quality** — Which countries and regions show the highest data completeness, and what does that reveal about the reliability of global disease reporting?
+- **🔍 Data Quality** — Which countries and regions show the highest data completeness, and what does that reveal about the reliability of global disease reporting?
 
 ---
 
@@ -18,8 +18,8 @@ The project is structured around three questions:
 |-------|------|
 | Ingestion & minimal cleaning | Python |
 | Data warehouse | BigQuery |
-| Transformation & modelling | dbt |
-| Visualisation | Looker Studio |
+| Transformation & modeling | dbt |
+| BI tool / Visualisation | Looker Studio |
 | Version control | Git + GitHub |
 
 ---
@@ -120,13 +120,16 @@ vetwatch-disease-analytics/
 
 The analysis of 4,126,257 animal disease outbreak records across 201 countries and 20 years reveals three headline findings:
 
-**🦠 Disease trends**
+- **🦠 Disease trends**
+
 Livestock diseases dominate global outbreak reporting (48.9%), led by Brucellosis, Echinococcus granulosus, and Bovine TB. Two significant events stand out: a severe FMD outbreak in Indonesia in 2022 ended the country's FMD-free status maintained since 1990, and Chile's Echinococcus granulosus reporting surged from 0 to 105,394 between 2018–2020 before returning to 0 — likely reflecting a reporting methodology change rather than a genuine disease emergence considering Echinococcus granulosus is an endemic disease in Chile.
 
-**🌍 Geographic distribution**
+- **🌍 Geographic distribution**
+
 The Americas, Europe, and Asia account for over 74% of all reported outbreaks. Iran leads globally with 435,700 outbreaks, followed by China and Chile. Whether high outbreak counts reflect genuine disease burden or strong reporting surveillance cannot be determined from this dataset alone.
 
-**🔍 Data quality**
+- **🔍 Data quality**
+
 The global average composite quality score is 71.5%, but varies significantly by region. Counterintuitively, the Middle East and Africa lead on data quality (78.6% and 78.5%) despite not being the highest outbreak-reporting regions — directly demonstrating that outbreak volume and reporting quality are not correlated. Vaccination reporting is the weakest metric globally (51.2%), compared to case reporting (87.8%) and death reporting (75.5%).
 
 > Full findings with data points and limitations are available in [`docs/analytical_findings.md`](docs/analytical_findings.md).
