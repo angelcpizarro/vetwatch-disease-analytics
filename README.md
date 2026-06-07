@@ -26,9 +26,7 @@ The project is structured around three questions:
 
 ## 🗂️ Data Source
 
-The project ingests the data from the WAHIS (World Animal Health Information System) database. This is a publicly available CSV export from the World Organisation for Animal Health of animal disease outbreak events globally.
-
-The data is available at [wahis.woah.org](https://wahis.woah.org) under **Six-monthly reports → Quantitative data**. No account is required to download it.
+The project ingests the data from the WAHIS (World Animal Health Information System) database. This is a publicly available CSV export from the World Organisation for Animal Health at [wahis.woah.org](https://wahis.woah.org) under **Six-monthly reports → Quantitative data**. No account is required to download it.
 
 An API integration was considered to simulate how production pipelines work with multiple source types simultaneously, but was deprioritised as it would add complexity without improving the analytical output and would affect the build of the data quality model.
 
