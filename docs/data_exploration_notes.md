@@ -4,11 +4,10 @@
  
 1. [Overview](#overview)
 2. [Data Representation](#data-representation)
-3. [Row Grain](#row-grain)
-4. [Column Exploration](#column-exploration)
-5. [Year Range Analysis](#year-range-analysis)
-6. [Data Quality Observations](#data-quality-observations)
-7. [Decisions Made as a Result of Exploration](#decisions-made-as-a-result-of-exploration)
+3. [Column Exploration](#column-exploration)
+4. [Year Range Analysis](#year-range-analysis)
+5. [Data Quality Observations](#data-quality-observations)
+6. [Decisions Made as a Result of Exploration](#decisions-made-as-a-result-of-exploration)
 
 
 ## Overview

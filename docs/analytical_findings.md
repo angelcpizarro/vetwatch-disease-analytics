@@ -38,7 +38,7 @@ The top 5 most reported diseases are dominated by livestock and multi-species di
 
 ### Foot-and-mouth disease (FMD) (2022)
 
-A sudden increase in FMD outbreaks is observed in 2022. Exploring the origin of this increase using the **Geographic Breakdown** page, reveals most of the outbreaks from Indonesia. Looking for information on scientific papers, found this:
+A sudden increase in FMD outbreaks is observed in 2022. Exploring the origin of this increase using the **Geographic Breakdown** page, reveals most of the outbreaks from Indonesia. This is consistent with peer-reviewed papers:
 
 > In 2022, a severe foot-and-mouth disease (FMD) outbreak swept across Indonesia, ending the country's FMD-free status which it had maintained since 1990. The highly contagious viral strain spread rapidly through Indonesian cattle and livestock populations, heavily impacting beef feedlots.
 
@@ -52,7 +52,7 @@ Chile's Echinococcus granulosus reporting shows a dramatic pattern — zero case
 
 A dip in reporting is visible across most categories in 2020, consistent with COVID-19 disrupting global veterinary surveillance infrastructure and reporting workflows. 
 
-Multi-species diseases show a different pattern — the expected 2020 dip is masked by the simultaneous peak of Echinococcus granulosus reporting in Chile (see Disease Trends section).
+Multi-species diseases show a different pattern — the expected 2020 dip is masked by the simultaneous peak of Echinococcus granulosus reporting in Chile (see Echinococcus granulosus section above).
 
 ### Disease category classification methodology
 

@@ -2,12 +2,14 @@
 
 ## Prerequisites
 
+**Accounts and services required:**
+- Google Cloud account with BigQuery enabled
+- dbt Cloud account
+- GitHub account
+
+**Local requirements:**
 - Python 3.9+
-- A Google Cloud project with BigQuery
-- A service account with BigQuery to be able to connect with dbt. Download key as JSON file
-- A dbt account and a dbt project 
-- During project creation, select BigQuery as the data warehouse and upload the JSON service account key downloaded from BigQuery
-- Connect to GitHub repository for automatic version control
+- Git
 
 ## 0. Download the data
 
@@ -58,7 +60,6 @@ python ingestion/load_to_bigquery.py
 ## 5. Run dbt
 
 ```bash
-cd dbt/project_name
 dbt seed          # load reference data
 dbt build         # run models and tests
 ```

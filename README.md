@@ -1,6 +1,6 @@
 # VetWatch: Global Animal Disease Analytics
 
-VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WAHIS (World Animal Health Information System), covering 201 countries and 172 diseases. This project intends to go beyond analysis and highlights the importance of data quality by building a model that quantifies reporting completeness of data by country and region alongside the outbreak analysis. The result is a project that explores not just what the data shows, but most importantly how much we can trust it.
+VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WOAH (World Organisation for Animal Health), covering 201 countries and 172 diseases. This project intends to go beyond analysis and highlights the importance of data quality by building a model that quantifies reporting completeness of data by country and region alongside the outbreak analysis. The result is a project that explores not just what the data shows, but most importantly how much we can trust it.
 
 The project is structured around three questions:
 
@@ -26,7 +26,7 @@ The project is structured around three questions:
 
 ## 🗂️ Data Source
 
-The project ingests the WAHIS quantitative six-monthly report from 2005 to 2024. This is a publicly available CSV export from the World Organisation for Animal Health of animal disease outbreak events globally.
+The project ingests the data from the WAHIS (World Animal Health Information System) database. This is a publicly available CSV export from the World Organisation for Animal Health of animal disease outbreak events globally.
 
 The data is available at [wahis.woah.org](https://wahis.woah.org) under **Six-monthly reports → Quantitative data**. No account is required to download it.
 
@@ -54,6 +54,7 @@ vetwatch-disease-analytics/
 │   └── load_to_bigquery.py
 │
 ├── dbt/                         # dbt project
+│   ├── dbt_project.yml
 │   ├── models/
 │   │   ├── staging/
 │   │   │   ├── schema.yml
@@ -94,7 +95,6 @@ vetwatch-disease-analytics/
 ├── .env.example                 # Example (template without secrets)
 ├── .gitignore
 ├── requirements.txt
-├── dbt_project.yml
 ├── LICENSE
 └── README.md
 ```
@@ -126,7 +126,7 @@ Livestock diseases dominate global outbreak reporting (48.9%), led by Brucellosi
 
 - **🌍 Geographic distribution**
 
-The Americas, Europe, and Asia account for over 74% of all reported outbreaks. Iran leads globally with 435,700 outbreaks, followed by China and Chile. Whether high outbreak counts reflect genuine disease burden or strong reporting surveillance cannot be determined from this dataset alone.
+The Americas, Europe, and Asia account for over 74% of all reported outbreaks. Iran leads globally with 435,700 outbreaks, followed by China and Chile. Whether high outbreak counts reflect genuine disease burden or strong reporting system cannot be determined from this dataset alone.
 
 - **🔍 Data quality**
 

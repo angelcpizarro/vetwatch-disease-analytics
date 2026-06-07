@@ -6,7 +6,7 @@
 2. [Staging Layer](#staging-layer)
    - [Problem 1 — event_id and outbreak_id loaded as float](#problem-1--event_id-and-outbreak_id-loaded-as-float)
    - [Problem 2 — Non-breaking space in disease names](#problem-2--non-breaking-space-in-disease-names)
-4. [Intermediate Layer](#intermediate-layer)
+3. [Intermediate Layer](#intermediate-layer)
    - [Problem 3 — Duplicate countries in int_country_reporting_quality](#problem-3--duplicate-countries-in-int_country_reporting_quality)
    - [Problem 4 — Inconsistent outbreak counts between marts](#problem-4--inconsistent-outbreak-counts-between-marts)
    - [Problem 5 — Apiary diseases inflating outbreak counts](#problem-5--apiary-diseases-inflating-outbreak-counts)

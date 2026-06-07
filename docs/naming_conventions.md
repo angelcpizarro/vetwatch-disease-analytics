@@ -105,7 +105,7 @@ Generic tests (not_null, unique, accepted_values) are defined in `schema.yml` fi
 
 | Test file | Description |
 |-----------|-------------|
-| `test_report_year_in_range.sql` | Confirms year range is between 2005 and 2025. |
+| `test_report_year_in_range.sql` | Confirms year range is between 2005 and 2024. |
 
 ---
 
