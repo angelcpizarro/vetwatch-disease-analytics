@@ -1,6 +1,6 @@
 # VetWatch: Global Animal Disease Analytics
 
-VetWatch is a data engineering and analytics portfolio project that analyses 20 years of animal disease outbreak data from WOAH (World Organisation for Animal Health), covering 201 countries and 172 diseases. This project intends to go beyond analysis and highlights the importance of data quality by building a model that quantifies reporting completeness of data by country and region alongside the outbreak analysis. The result is a project that explores not just what the data shows, but most importantly how much we can trust it.
+VetWatch is an end-to-end analytics engineering project that analyses 20 years of animal disease outbreak data from WOAH (World Organisation for Animal Health), covering 201 countries and 172 diseases. This project intends to go beyond analysis and highlights the importance of data quality by building a model that quantifies reporting completeness of data by country and region alongside the outbreak analysis. The result is a project that explores not just what the data shows, but most importantly how much we can trust it.
 
 The project is structured around three questions:
 
