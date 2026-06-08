@@ -18,7 +18,7 @@ The project is structured around three questions:
 |-------|------|
 | Ingestion & minimal cleaning | Python |
 | Data warehouse | BigQuery |
-| Transformation & modeling | dbt |
+| Transformation & modelling | dbt |
 | BI tool / Visualisation | Looker Studio |
 | Version control | Git + GitHub |
 
